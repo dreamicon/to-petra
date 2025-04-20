@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A Letter for Petra</title>
+  <style>
+    body {
+      background: #fdf6e3;
+      font-family: 'Georgia', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .envelope {
+      background: #fffdf5;
+      border: 2px solid #d8b4a0;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      font-size: 1.6rem;
+      color: #8b5c3c;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .love-note {
+      font-size: 1.3rem;
+      color: #5e3c24;
+      margin-bottom: 30px;
+      white-space: pre-line;
+      min-height: 130px;
+    }
+
+    button {
+      background-color: #d8b4a0;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #b8917c;
+    }
+
+    .spotify {
+      margin-top: 30px;
+    }
+
+    .signature {
+      margin-top: 25px;
+      font-style: italic;
+      color: #a67860;
+      font-size: 1rem;
+    }
+
+    /* Floating hearts & petals */
+    .heart, .petal {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      opacity: 0.7;
+      animation: float 10s linear infinite;
+    }
+
+    .heart {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+    }
+
+    .petal {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/4375/4375824.png');
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating hearts and petals -->
+  <script>
+    function createFloatingElements(type, count) {
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('div');
+        el.classList.add(type);
+        el.style.left = `${Math.random() * 100}%`;
+        el.style.animationDuration = `${6 + Math.random() * 8}s`;
+        el.style.animationDelay = `${Math.random() * 10}s`;
+        document.body.appendChild(el);
+      }
+    }
+
+    createFloatingElements('heart', 10);
+    createFloatingElements('petal', 10);
+  </script>
+
+  <div class="envelope">
+    <div class="header">Dear Petra 💌</div>
+    <div class="love-note" id="loveNote"></div>
+    <button onclick="showNote()">Read Another</button>
+
+    <div class="spotify">
+      <p style="color: #8b5c3c; margin-bottom: 10px;">Here’s a playlist that reminds me of you 🎶</p>
+      <iframe style="border-radius:12px" 
+              src="https://open.spotify.com/playlist/37i9dQZF1DWZIQpJDqCc10?si=15cc44e1686542dd" 
+              width="100%" height="152" 
+              frameBorder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy"></iframe>
+      <p style="margin-top: 10px;">
+        <a href="https://open.spotify.com/playlist/37i9dQZF1DXcCnTAt8CfNe" target="_blank" style="text-decoration: none; color: #d8b4a0; font-weight: bold;">Open playlist in Spotify</a>
+      </p>
+    </div>
+
+    <div class="signature">Love, Clinton 💌</div>
+  </div>
+
+  <script>
+    const notes = [
+      "Petra,\n\nEvery day with you is a chapter I never want to end.",
+      "Hey Petra,\n\nJust a reminder: you're everything to me. Always will be.",
+      "Sweet Petra,\n\nWhen I say I love you, I mean forever — no conditions, no limits.",
+      "Petra,\n\nYou light up my world even when it's dark. I’m lucky to love you.",
+      "Love,\n\nYou make my heart feel like it’s home. I’m so grateful for you.",
+      "My Petra,\n\nEven if I had the whole world, I’d still choose you. Every time.",
+      "Dearest Petra,\n\nYou’re more than enough. You’re everything I dreamed of.",
+      "Beautiful Petra,\n\nWhen you're happy, I feel like I’m flying. Never stop smiling.",
+      "To my love Petra,\n\nYou are never alone — you carry my heart with you always.",
+      "Petra, my sunshine,\n\nYou’ve got the kind of soul that turns ordinary moments magical."
+    ];
+
+    function typeEffect(text, i = 0) {
+      const element = document.getElementById("loveNote");
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        setTimeout(() => typeEffect(text, i + 1), 30);
+      }
+    }
+
+    function showNote() {
+      const note = notes[Math.floor(Math.random() * notes.length)];
+      document.getElementById("loveNote").textContent = "";
+      typeEffect(note);
+    }
+
+    window.onload = showNote;
+  </script>
+</body>
+</html>
